@@ -23,18 +23,17 @@ server_script {
 ui_page 'nui/index.html'
 
 files{
-  
-
   'nui/index.html',
-  
   -- MAIN
   'nui/main.css',
   -- MODULES
-
   'nui/main.js',
-
   -- IMAGES
   'nui/imgs/*.png',
   'nui/imgs/*.jpg',
+}
 
+
+escrow_ignore{
+  
 }
