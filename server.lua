@@ -34,7 +34,6 @@ end)
 local checkHasDiscordRole = function(src)
   if not Config.lockCustomToRole then return true; end
   local roles = exports.Badger_Discord_API:GetDiscordRoles(src)
-  print(json.encode(roles, {indent = true}))
   if not roles then return false; end
   for k,v in pairs(Config.lockCustomToRole) do 
     for k2,v2 in pairs(roles) do 

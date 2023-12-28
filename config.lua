@@ -1,7 +1,7 @@
 Config = {
   identifierType     = "fivem", --## This is the identifier type that will be used to save the designs.
   allowCustomDesigns = true, --## allow players to use the commands to upload their own designs
-  lockCustomToRole   = false, --## Bunch of roles that can use the custom designs can also be false to allow everyone to use this feature
+  lockCustomToRole   = {}, --## Bunch of roles that can use the custom designs can also be false to allow everyone to use this feature
   --[[
     addBackgroundImageCommand = "dirk-3dme:uploadBackground", --## This is the command that will be used to upload the background image
     addLogoImageCommand       = "dirk-3dme:uploadLogo", --## This is the command that will be used to upload the logo image
@@ -63,8 +63,28 @@ Config = {
 
 local isServer = IsDuplicityVersion()
 
+
+-- QBCore = exports['qb-core']:GetCoreObject() --\\ Uncomment for QBCORE
+-- ESX = exports['es_extended']:getSharedObject() --\\ Uncomment for ESX
+
 if isServer then 
   notifyPlayer = function(src, msg, type)
+
+    
+    --[[
+       UNCOMMENT BELOW FOR QBCORE
+    ]]
+    -- local player = QBCore.Functions.GetPlayer(src)
+    -- if not player then return false; end
+    -- player.Functions.Notify(msg, type)
+
+    --[[
+       UNCOMMENT BELOW FOR ESX
+    ]]
+    -- local player = ESX.GetPlayerFromId(src)
+    -- if not player then return false; end
+    -- player.showNotification(msg, type)
+
     TriggerClientEvent('chat:addMessage', src, {
       color = type == "error" and {255, 0, 0} or {0, 255, 0},
       multiline = true,
@@ -73,6 +93,18 @@ if isServer then
   end
 else
   notifyPlayer = function(msg, type)
+
+
+    --[[
+       UNCOMMENT BELOW FOR QBCORE
+    ]]
+    -- QBCore.Functions.Notify(msg, type)
+
+    --[[
+       UNCOMMENT BELOW FOR ESX
+    ]]
+    -- ESX.ShowNotification(msg, type)
+
     TriggerEvent('chat:addMessage', {
       color = type == "error" and {255, 0, 0} or {0, 255, 0},
       multiline = true,
