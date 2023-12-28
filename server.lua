@@ -6,6 +6,12 @@ local extractID = function(src, _type)
 end
 
 CreateThread(function()
+  local rawFiles = LoadResourceFile(GetCurrentResourceName(), "saved_designs/data.json")
+  if not rawFiles then 
+    loaded_designs = {}
+  else
+    loaded_designs = json.decode(rawFiles)
+  end 
   for k,v in pairs(Config.textTypes) do
     RegisterCommand(k, function(source, args, rawCommand)
       local src = source
@@ -25,21 +31,6 @@ CreateThread(function()
   end
 end)
 
-
-
-
-CreateThread(function()
-  local rawFiles = LoadResourceFile(GetCurrentResourceName(), "saved_designs/data.json")
-  if not rawFiles then 
-    loaded_designs = {}
-  else
-    loaded_designs = json.decode(rawFiles)
-  end 
-
-
-end)
-
-
 local checkHasDiscordRole = function(src)
   if not Config.lockCustomToRole then return true; end
   local roles = exports.Badger_Discord_API:GetDiscordRoles(src)
@@ -50,6 +41,9 @@ local checkHasDiscordRole = function(src)
       if v == v2 then return true; end
     end
   end
+
+  notifyPlayer(src, "You do not have permission to use this command", "error")
+
   return false 
 end
 
@@ -68,11 +62,7 @@ RegisterCommand('dirk-3dme:uploadBackground', function(source, args, rawCommand)
   
   SaveResourceFile(GetCurrentResourceName(), "saved_designs/data.json", json.encode(loaded_designs, {indent = true}) )
 
-  TriggerClientEvent('chat:addMessage', src, {
-    color = {255, 0, 0},
-    multiline = true,
-    args = {'Design', 'Your design has been updated!'}
-  })
+  notifyPlayer(src, "Your design has been updated!", "success")
 
 end, false)
 
@@ -88,10 +78,6 @@ RegisterCommand('dirk-3dme:uploadImage', function(source, args, rawCommand)
   loaded_designs[myId].backgroundLogo = mySite
   SaveResourceFile(GetCurrentResourceName(), "saved_designs/data.json", json.encode(loaded_designs, {indent = true}) )
 
-  TriggerClientEvent('chat:addMessage', src, {
-    color = {255, 0, 0},
-    multiline = true,
-    args = {'Design', 'Your design has been updated!'}
-  })
+  notifyPlayer(src, "Your design has been updated!", "success")
 
 end, false)
