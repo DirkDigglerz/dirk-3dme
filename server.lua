@@ -13,7 +13,9 @@ CreateThread(function()
     loaded_designs = json.decode(rawFiles)
   end 
   for k,v in pairs(Config.textTypes) do
+    print('DIRK-3DME: Registering command: /' .. k)
     RegisterCommand(k, function(source, args, rawCommand)
+      print(' triggering command ')
       local src = source
       local myDesign = nil
       if Config.allowCustomDesigns then 
