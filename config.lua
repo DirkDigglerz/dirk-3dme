@@ -1,7 +1,7 @@
 Config = {
   identifierType     = "fivem", --## This is the identifier type that will be used to save the designs.
   allowCustomDesigns = true, --## allow players to use the commands to upload their own designs
-  lockCustomToRole   = {'1157843353585598478'}, --## Bunch of roles that can use the custom designs can also be false to allow everyone to use this feature
+  lockCustomToRole   = false, --## Bunch of roles that can use the custom designs can also be false to allow everyone to use this feature
   --[[
     addBackgroundImageCommand = "dirk-3dme:uploadBackground", --## This is the command that will be used to upload the background image
     addLogoImageCommand       = "dirk-3dme:uploadLogo", --## This is the command that will be used to upload the logo image
