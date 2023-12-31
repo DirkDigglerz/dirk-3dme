@@ -30,8 +30,6 @@ Config = {
   offset              = vector3(1.3, 0.0, 1.3), --## Will be off to the side of the ped 
   textDisplayDistance = 25.0, --## how far to show the text
 
-
-
   textTypes = {
     ['do'] = {
       label = "Do",

@@ -25,6 +25,10 @@ escrow_ignore{
   'config.lua',
 }
 
+server_export{
+  'postTextOnClient', --## ARGS: src, type, message, design
+}
+
 -- NUI
 ui_page 'nui/index.html'
 

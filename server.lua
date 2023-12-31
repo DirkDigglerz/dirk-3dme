@@ -1,9 +1,19 @@
 local loaded_designs = {}
 
-
 local extractID = function(src, _type)
   return GetPlayerIdentifierByType(src, _type)
 end
+
+postTextOnClient = function(src, type, message, design)
+  if Config.allowCustomDesigns and not design then 
+    local myId = extractID(src, Config.identifierType)
+    design = loaded_designs[myId]
+  end
+  local myPed = GetPlayerPed(src)
+  local myNetId = NetworkGetNetworkIdFromEntity(myPed)
+  TriggerClientEvent("dirk-3dme:newText", -1, myNetId, type, message, design)
+end
+
 
 CreateThread(function()
   local rawFiles = LoadResourceFile(GetCurrentResourceName(), "saved_designs/data.json")
@@ -16,18 +26,8 @@ CreateThread(function()
     print('DIRK-3DME: Registering command: /' .. k)
     RegisterCommand(k, function(source, args, rawCommand)
       local src = source
-      local myDesign = nil
-      if Config.allowCustomDesigns then 
-        local myId = extractID(src, Config.identifierType)
-        myDesign = loaded_designs[myId]
-
-      end
-
-      local myPed = GetPlayerPed(src)
-      local message = table.concat(args, " ", 1)
-      local myNetId = NetworkGetNetworkIdFromEntity(myPed)
-
-      TriggerClientEvent("dirk-3dme:newText", -1, myNetId, k, message, myDesign)
+      local message = table.concat(args, " ")
+      postTextOnClient(src, k, message, v.design)
     end, false)
   end
 end)
