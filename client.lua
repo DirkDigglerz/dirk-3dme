@@ -127,9 +127,6 @@ end
 
 RegisterNetEvent('dirk-3dme:newText', newText)
 
-
-
-
 CreateThread(function()
   while true do 
     local wait_time = 500

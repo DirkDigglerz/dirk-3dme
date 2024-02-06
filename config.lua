@@ -27,7 +27,7 @@ Config = {
   theURL                = "The URL of the image you wish to upload",
 
 
-  offset              = vector3(1.3, 0.0, 1.3), --## Will be off to the side of the ped 
+  offset              = vector3(0.0, 0.0, 1.3), --## Will be off to the side of the ped 
   textDisplayDistance = 25.0, --## how far to show the text
 
   textTypes = {
