@@ -4,7 +4,15 @@ local extractID = function(src, _type)
   return GetPlayerIdentifierByType(src, _type)
 end
 
+local last_used = {}
 postTextOnClient = function(src, type, message, design)
+  local now = os.time()
+  if last_used[src] then return false; end
+  last_used[src] = now 
+  SetTimeout(5000, function()
+    last_used[src] = false
+  end)
+
   if Config.allowCustomDesigns and not design then 
     local myId = extractID(src, Config.identifierType)
     design = loaded_designs[myId]
