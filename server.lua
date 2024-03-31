@@ -6,9 +6,8 @@ end
 
 local last_used = {}
 postTextOnClient = function(src, type, message, design)
-  local now = os.time()
   if last_used[src] then return false; end
-  last_used[src] = now 
+  last_used[src] = os.time() 
   SetTimeout(5000, function()
     last_used[src] = false
   end)
